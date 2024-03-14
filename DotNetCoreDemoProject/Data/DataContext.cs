@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DotNetCoreDemoProject.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : Db
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
