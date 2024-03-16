@@ -11,17 +11,19 @@ namespace BookStoreApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "PaymentDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    PaymentDetailId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CardOwnerName = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(16)", nullable: false),
+                    ExpirationDate = table.Column<string>(type: "nvarchar(5)", nullable: false),
+                    SecurityCode = table.Column<string>(type: "nvarchar(3)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.Id);
+                    table.PrimaryKey("PK_PaymentDetails", x => x.PaymentDetailId);
                 });
         }
 
@@ -29,7 +31,7 @@ namespace BookStoreApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "PaymentDetails");
         }
     }
 }
