@@ -1,4 +1,4 @@
-using BookStoreApi.Model;
+using LibraryManagementSystemApi;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<PaymentDetailContext> (options =>
+builder.Services.AddDbContext<Context> (options =>
 {
     options.UseSqlServer (builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
