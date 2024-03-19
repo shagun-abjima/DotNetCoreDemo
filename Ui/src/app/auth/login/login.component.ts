@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-hidePwdContent: boolean = true;
+hidePassword: boolean = true;
 loginForm: FormGroup;
 constructor(fb:FormBuilder){
 this.loginForm=fb.group(
