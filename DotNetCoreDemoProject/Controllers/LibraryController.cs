@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystemApi.Controllers
 {
@@ -27,12 +28,11 @@ namespace LibraryManagementSystemApi.Controllers
 
             Context.Users.Add(user);
             Context.SaveChanges();
-
+            return Ok("Thank you for Registering");
             const string subject = "Account Created";
-            
 
-          
-
+        }
+        
         [HttpGet("Login")]
         public ActionResult Login(string email, string password)
         {
@@ -70,7 +70,7 @@ namespace LibraryManagementSystemApi.Controllers
         [HttpPost("OrderBook")]
         public ActionResult OrderBook(int userId, int bookId)
         {
-            var canOrder = Context.Orders.Count(o => o.UserId == userId && !o.Returned) < 3;
+            var canOrder = Context.Orders.Count(o => o.UserId == userId && !o.returned) < 3;
 
             if (canOrder)
             {
@@ -80,7 +80,7 @@ namespace LibraryManagementSystemApi.Controllers
                     BookId = bookId,
                     OrderDate = DateTime.Now,
                     ReturnDate = null,
-                    Returned = false,
+                    returned = false,
                     FinePaid = 0
                 });
 
@@ -181,7 +181,7 @@ namespace LibraryManagementSystemApi.Controllers
             var order = Context.Orders.SingleOrDefault(o => o.UserId == userId && o.BookId == bookId);
             if (order is not null)
             {
-                order.Returned = true;
+                order.returned = true;
                 order.ReturnDate = DateTime.Now;
                 order.FinePaid = fine;
 
@@ -243,7 +243,7 @@ namespace LibraryManagementSystemApi.Controllers
             var orders = Context.Orders
                             .Include(o => o.Book)
                             .Include(o => o.User)
-                            .Where(o => !o.Returned)
+                            .Where(o => !o.returned)
                             .ToList();
 
             var emailsWithFine = orders.Where(o => DateTime.Now > o.OrderDate.AddDays(10)).ToList();
@@ -265,7 +265,7 @@ namespace LibraryManagementSystemApi.Controllers
             var orders = Context.Orders
                             .Include(o => o.Book)
                             .Include(o => o.User)
-                            .Where(o => !o.Returned)
+                            .Where(o => !o.returned)
                             .ToList();
 
             var emailsWithFine = orders.Where(o => DateTime.Now > o.OrderDate.AddDays(10)).ToList();
