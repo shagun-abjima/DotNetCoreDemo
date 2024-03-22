@@ -1,0 +1,14 @@
+<div >
+    <div >
+      <h4 >Enter your name and code</h4>
+      <mat-form-field >
+        <mat-label>Code</mat-label>
+        <input type="text" matInput [(ngModel)]="code" placeholder="enter code" />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput [(ngModel)]="name" placeholder="enter your name" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="join()">Join</button>
+    </div>
+  </div>
