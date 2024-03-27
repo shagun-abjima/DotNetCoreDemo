@@ -12,7 +12,5 @@ namespace EmployeeApi.Model
         public string Mobile { get; set; }
         public int UserType { get; set; }
 
-
-
     }
 }
