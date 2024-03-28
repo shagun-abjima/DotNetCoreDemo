@@ -106,8 +106,7 @@ namespace EmployeeApi.Controllers
             else
             {
                 return Ok(new
-                {
-                    StatusCode = 200,
+                {                    StatusCode = 200,
                     EmployeeDetails = employee
                 });
             }
